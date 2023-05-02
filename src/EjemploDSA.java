@@ -35,7 +35,7 @@ public class EjemploDSA {
         Consola.saltoDeLinea();
     }
 
-    // Método para firmar un mensaje utilizando una clave privada
+    //Método para firmar un mensaje utilizando una clave privada
     private static byte[] firmarMensaje(String mensaje, DSAPrivateKey privateKey) throws Exception {
         Signature firma = Signature.getInstance("SHA256withDSA");
         firma.initSign(privateKey);
