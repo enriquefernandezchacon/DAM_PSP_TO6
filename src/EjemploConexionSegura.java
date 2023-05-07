@@ -1,10 +1,7 @@
 import utilidades.Consola;
 
 import javax.net.ssl.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class EjemploConexionSegura {
 
@@ -14,10 +11,15 @@ public class EjemploConexionSegura {
         Consola.salidaNormal("==========================");
         Consola.saltoDeLinea();
 
+        System.setProperty("javax.net.ssl.trustStore", "truststore.jks");
+        System.setProperty("javax.net.ssl.trustStorePassword", "123456");
+
         SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
 
         // Crear un SSLSocket y conectarse al servidor en el puerto 12345
         SSLSocket sslSocket = (SSLSocket) sslSocketFactory.createSocket("localhost", 12345);
+        //Una vez que hayas completado estos pasos, actualiza el código del cliente para utilizar el nuevo almacén de claves truststore.jks como almacén de claves de confianza, tal como se explicó en la respuesta anterior.
+
 
         // Enviar un mensaje al servidor
         PrintWriter out = new PrintWriter(sslSocket.getOutputStream(), true);
@@ -26,8 +28,8 @@ public class EjemploConexionSegura {
         // Leer la respuesta del servidor
         BufferedReader in = new BufferedReader(new InputStreamReader(sslSocket.getInputStream()));
         String line = in.readLine();
-        System.out.println("Respuesta recibida del servidor: " + line);
-
+        Consola.salidaNormal("Respuesta recibida del servidor: " + line);
+        Consola.saltoDeLinea();
         // Cerrar los recursos
         out.close();
         in.close();
